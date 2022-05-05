@@ -1,0 +1,33 @@
+server:
+  port: 9090
+
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: board-second
+          uri: lb://BOARD
+          predicates:
+            - Path=/board/**
+        - id: board
+          uri: lb://BOARD
+          predicates:
+            - Path=/board/**
+        - id: webclient
+          uri: lb://WEBCLIENT
+          predicates:
+            - Path=/webclient/**
+  application:
+    name: spring-gateway
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id:
+      ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
