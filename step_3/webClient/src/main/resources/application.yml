@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: webclient
+  mvc:
+    hidden-method:
+      filter:
+        enabled: true
+
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  shutdown: graceful
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
+
+
